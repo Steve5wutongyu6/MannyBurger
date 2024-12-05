@@ -31,8 +31,20 @@
         android:id="@+id/divider1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:marginTop="16dp"
+        android:layout_marginTop="16dp"
         android:background="@color/black" />
+
+    <LinearLayout
+        android:id="@+id/menuFromMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/productRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -56,16 +68,18 @@
 
 
             <EditText
+                android:id="@+id/note"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="请选择收货地址"
+                android:hint="备注"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:inputType="text" />
         </LinearLayout>
 
         <TextView
+            android:id="@+id/paymethod"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="支付方式"
@@ -73,7 +87,7 @@
             android:textColor="@color/black" />
 
         <RadioGroup
-            android:id="@+id/categories"
+            android:id="@+id/paymethodcategories"
             android:layout_below="@id/restaurantInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -114,7 +128,7 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:marginTop="16dp"
+        android:layout_marginTop="16dp"
         android:background="@color/black" />
 
     <LinearLayout
@@ -125,6 +139,7 @@
         android:background="@android:color/white">
 
         <TextView
+            android:id="@+id/totalPrice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -133,6 +148,7 @@
             android:textColor="@color/black" />
 
         <Button
+            android:id="@+id/submitOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="提交订单"

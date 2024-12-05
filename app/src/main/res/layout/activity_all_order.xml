@@ -33,14 +33,15 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:marginTop="16dp"
+        android:layout_marginTop="16dp"
         android:background="@color/black" />
     <!-- Order Item -->
-    <LinearLayout
+   <!-- <LinearLayout
+        android:id="@+id/OrderItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:marginTop="16dp">
+        android:layout_marginTop="16dp">
 
         <ImageView
             android:id="@+id/dishImageView"
@@ -53,7 +54,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1"
-            android:marginLeft="16dp">
+            android:layout_marginLeft="16dp">
 
             <TextView
                 android:id="@+id/dishNameTextView"
@@ -94,16 +95,34 @@
             android:layout_height="wrap_content"
             android:text="再来一单"
             android:layout_gravity="center_vertical"
-            android:marginLeft="16dp"
+            android:layout_marginLeft="16dp"
             android:background="@color/black" />
-    </LinearLayout>
+    </LinearLayout>-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/orderRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@null"
+        android:dividerHeight="0dp"/>
+
+    <Button
+        android:id="@+id/copyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="再来一单"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:background="@color/black"
+        android:layout_marginTop="16dp"/>
 
     <!-- Divider -->
     <View
         android:id="@+id/divider1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:marginTop="16dp"
+        android:layout_marginTop="16dp"
         android:background="@color/black" />
 
     <!-- Placeholder for more items -->
@@ -111,7 +130,7 @@
         android:id="@+id/placeholderTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:marginTop="16dp"
+        android:layout_marginTop="16dp"
         android:text="我是有底线的"
         android:textSize="16sp"
         android:textColor="@color/black"

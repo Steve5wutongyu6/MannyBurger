@@ -25,7 +25,7 @@
             android:id="@+id/AllOrderButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_constraintEnd_toEndOf="parent"
+            android:layout_alignParentEnd ="true"
             android:layout_marginEnd="8dp"
             android:text="所有订单" />
 
@@ -36,7 +36,7 @@
         android:id="@+id/divider1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:marginTop="16dp"
+        android:layout_marginTop="16dp"
         android:background="@color/black" />
 
     <LinearLayout
@@ -91,7 +91,7 @@
         android:id="@+id/divider2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:marginTop="16dp"
+        android:layout_marginTop="16dp"
         android:background="@color/black" />
 
     <!-- Bottom cart -->
@@ -112,11 +112,12 @@
             android:contentDescription="Shopping Cart"/>
 
         <TextView
+            android:id="@+id/cartPriceTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="购物车：15元"
-            android:paddingStart="16dp"/>
+            android:paddingStart="16dp"
+            android:text="购物车：15元" />
 
         <Button
             android:id="@+id/SubmitOrderButton"
@@ -129,7 +130,7 @@
         android:id="@+id/divider3"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:marginTop="16dp"
+        android:layout_marginTop="16dp"
         android:background="@color/black" />
 </RelativeLayout>
 
