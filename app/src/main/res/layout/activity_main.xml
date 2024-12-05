@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@drawable/bg"
-    >
+    android:background="@drawable/bg">
+
     <!-- Search and options -->
     <LinearLayout
         android:id="@+id/searchOptions"
@@ -23,38 +23,24 @@
 
         <Button
             android:id="@+id/AllOrderButton"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd ="true"
             android:layout_marginEnd="8dp"
             android:text="所有订单" />
-
-
     </LinearLayout>
 
     <View
         android:id="@+id/divider1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/black" />
-
-    <LinearLayout
-        android:id="@+id/restaurantInfo"
         android:layout_below="@id/searchOptions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="16dp">
-
-
-
-    </LinearLayout>
+        android:layout_marginTop ="16dp"
+        android:background="@color/black" />
 
     <!-- Categories -->
     <RadioGroup
         android:id="@+id/categories"
-        android:layout_below="@id/restaurantInfo"
+        android:layout_below="@id/divider1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -84,15 +70,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:choiceMode="multipleChoice"
+        android:listSelector="@android:color/transparent"
         android:divider="@null"
         android:dividerHeight="0dp"/>
-
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/black" />
 
     <!-- Bottom cart -->
     <LinearLayout
@@ -102,8 +83,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:padding="16dp"
-        >
+        android:padding="16dp">
 
         <ImageView
             android:layout_width="24dp"
@@ -112,12 +92,12 @@
             android:contentDescription="Shopping Cart"/>
 
         <TextView
-            android:id="@+id/cartPriceTextView"
+            android:id="@+id/bottomCartTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingStart="16dp"
-            android:text="购物车：15元" />
+            android:text="购物车：0元"
+            android:paddingStart="16dp"/>
 
         <Button
             android:id="@+id/SubmitOrderButton"
@@ -125,14 +105,4 @@
             android:layout_height="wrap_content"
             android:text="去结算"/>
     </LinearLayout>
-
-    <View
-        android:id="@+id/divider3"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/black" />
 </RelativeLayout>
-
-
-
