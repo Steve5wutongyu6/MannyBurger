@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
-    private List<Item> itemList;
-    private List<Item> selectedItems;
+    private final List<Item> itemList;
+    private final List<Item> selectedItems;
 
     public ItemAdapter(List<Item> itemList) {
         this.itemList = itemList;

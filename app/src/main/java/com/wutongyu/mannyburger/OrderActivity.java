@@ -9,10 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,7 +85,7 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     static class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
-        private List<String> productList;
+        private final List<String> productList;
 
         public ProductAdapter(List<String> productList) {
             this.productList = productList;
