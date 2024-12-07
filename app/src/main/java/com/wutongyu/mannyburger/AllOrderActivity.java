@@ -28,22 +28,22 @@ public class AllOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_order);
 
-        // Initialize views
+        // 绑定控件
         orderRecyclerView = findViewById(R.id.orderRecyclerView);
         copyButton = findViewById(R.id.copyButton);
 
-        // Initialize database helper
+        // 初始化数据库
         dbHelper = new OrderDatabaseHelper(this);
 
-        // Load orders from database
+        // 使用loadAllOrders()方法加载所有订单
         loadOrders();
 
-        // Set up RecyclerView
+        // 初始化列表控件
         orderRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         orderAdapter = new OrderAdapter(orderList);
         orderRecyclerView.setAdapter(orderAdapter);
 
-        // Copy Button Click Listener
+        // 按钮监听控件
         copyButton.setOnClickListener(v -> {
             if (!orderList.isEmpty()) {
                 Order lastOrder = orderList.get(orderList.size() - 1);
@@ -56,6 +56,7 @@ public class AllOrderActivity extends AppCompatActivity {
         });
     }
 
+    // 加载所有订单
     private void loadOrders() {
         orderList = dbHelper.getAllOrders();
         if (orderAdapter != null) {
@@ -63,6 +64,7 @@ public class AllOrderActivity extends AppCompatActivity {
         }
     }
 
+    // 订单列表适配器
     static class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
         private List<Order> orderList;
 

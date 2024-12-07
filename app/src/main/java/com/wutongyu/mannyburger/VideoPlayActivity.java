@@ -15,7 +15,7 @@ public class VideoPlayActivity extends AppCompatActivity {
         VideoView videoView = findViewById(R.id.videoView);
         String videoPath = getIntent().getStringExtra("videoPath");
 
-        // 检查视频路径是否为 raw 文件夹中的资源
+        // 检查视频路径是否为 raw 文件夹中的资源,根据于不同情况设置不同的播放路径
         if (videoPath.startsWith("android.resource://")) {
             videoView.setVideoURI(Uri.parse(videoPath));
         } else {

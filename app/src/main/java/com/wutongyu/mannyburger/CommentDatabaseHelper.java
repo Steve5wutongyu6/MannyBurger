@@ -35,6 +35,7 @@ public class CommentDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        //创建表
         String CREATE_TABLE = "CREATE TABLE " + TABLE_COMMENTS + "("
                 + COLUMN_COMMENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COLUMN_USER_NAME + " TEXT,"

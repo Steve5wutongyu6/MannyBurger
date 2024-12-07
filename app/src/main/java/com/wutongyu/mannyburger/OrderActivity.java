@@ -33,29 +33,29 @@ public class OrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
 
-        // Initialize views
+        // 绑定控件
         productRecyclerView = findViewById(R.id.productRecyclerView);
         noteEditText = findViewById(R.id.note);
         totalPriceTextView = findViewById(R.id.totalPrice);
         submitOrderButton = findViewById(R.id.submitOrder);
 
-        // Get data from MainActivity
+        // 从MainActivity获取订单详情和总价
         Intent intent = getIntent();
         String orderDetails = intent.getStringExtra("order_details");
         totalPrice = intent.getDoubleExtra("total_price", 0.0);
 
-        // Set total price text
+        // 订单总价格
         totalPriceTextView.setText("合计 ￥" + totalPrice);
 
-        // Parse order details into a list of products
+        // 产品信息存于List中
         productList = parseOrderDetails(orderDetails);
 
-        // Set up RecyclerView
+        // 初始化RecyclerView
         productRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         productAdapter = new ProductAdapter(productList);
         productRecyclerView.setAdapter(productAdapter);
 
-        // Submit Order Button Click Listener
+        // 监听提交按钮
         submitOrderButton.setOnClickListener(v -> {
             String note = noteEditText.getText().toString();
             saveOrderToDatabase(note);
@@ -63,6 +63,7 @@ public class OrderActivity extends AppCompatActivity {
         });
     }
 
+    // 解析订单详情
     private List<String> parseOrderDetails(String orderDetails) {
         List<String> products = new ArrayList<>();
         if (orderDetails != null && !orderDetails.isEmpty()) {
@@ -74,6 +75,8 @@ public class OrderActivity extends AppCompatActivity {
         return products;
     }
 
+
+    // 保存订单到数据库
     private void saveOrderToDatabase(String note) {
         OrderDatabaseHelper dbHelper = new OrderDatabaseHelper(this);
         StringBuilder itemsStringBuilder = new StringBuilder();
@@ -84,6 +87,8 @@ public class OrderActivity extends AppCompatActivity {
         dbHelper.insertOrder(items, note, totalPrice);
     }
 
+
+    // 自定义适配器
     static class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
         private final List<String> productList;
 

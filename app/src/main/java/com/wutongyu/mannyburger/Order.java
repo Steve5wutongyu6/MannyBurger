@@ -1,5 +1,5 @@
 package com.wutongyu.mannyburger;
-
+//订单信息封装类
 public class Order {
     private int id;
     private String items;

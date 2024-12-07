@@ -1,5 +1,5 @@
 package com.wutongyu.mannyburger;
-
+//商品信息封装类
 public class Item {
     private String name;
     private double price;

@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize views
+        // 绑定控件
         menuItemsListView = findViewById(R.id.menuItems);
         categoriesRadioGroup = findViewById(R.id.categories);
         orderingRadioButton = findViewById(R.id.ordering);
@@ -48,16 +48,17 @@ public class MainActivity extends AppCompatActivity {
         submitOrderButton = findViewById(R.id.SubmitOrderButton);
         bottomCartTextView = findViewById(R.id.bottomCartTextView);
 
-        // Initialize database and load products
+        // 初始化数据
         ProductDatabaseHelper dbHelper = new ProductDatabaseHelper(this);
         productList = loadProductsFromDatabase(dbHelper.getWritableDatabase());
         selectedProducts = new ArrayList<>();
 
-        // Set up adapter for ListView
-        productAdapter = new ProductAdapter();
+        // 绑定适配器productAdapter
+        productAdapter = new ProductAdapter(this, productList, selectedProducts, bottomCartTextView);
         menuItemsListView.setAdapter(productAdapter);
 
-        // Handle category selection
+
+        // 监听单选按钮
         categoriesRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.ordering) {
                 menuItemsListView.setVisibility(View.VISIBLE);
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Handle All Orders button click
+        // 监听All Order button
         allOrderButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AllOrderActivity.class);
             startActivity(intent);
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        // Handle Submit Order button click
+        // 提交按钮相关
         submitOrderButton.setOnClickListener(v -> {
             StringBuilder orderDetailsBuilder = new StringBuilder();
             for (Product product : selectedProducts) {
@@ -102,10 +103,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+    // 从数据库加载商品数据
     private List<Product> loadProductsFromDatabase(SQLiteDatabase db) {
-        List<Product> products = new ArrayList<>();
+        List<Product> products = new ArrayList<>();// 创建一个空列表
         String table = ProductDatabaseHelper.getTableProducts(); // 使用公共方法获取表名
+
+        // 查询数据库中的所有商品数据
         Cursor cursor = db.query(table, new String[]{"pid", "pname", "shop_price"}, null, null, null, null, null);
         while (cursor.moveToNext()) {
             int pid = cursor.getInt(cursor.getColumnIndexOrThrow("pid"));
@@ -117,67 +120,5 @@ public class MainActivity extends AppCompatActivity {
         return products;
     }
 
-    private class ProductAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return productList.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return productList.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return productList.get(position).getId();
-        }
-
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder;
-            if (convertView == null) {
-                convertView = LayoutInflater.from(MainActivity.this).inflate(R.layout.custom_list_item, parent, false);
-                holder = new ViewHolder();
-                holder.productNameTextView = convertView.findViewById(R.id.productNameTextView);
-                holder.checkBox = convertView.findViewById(R.id.checkbox);
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-
-            Product product = productList.get(position);
-            holder.productNameTextView.setText(product.getName() + " - ￥" + product.getPrice());
-
-            holder.checkBox.setOnCheckedChangeListener(null);
-            holder.checkBox.setChecked(selectedProducts.contains(product));
-
-            holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                if (isChecked) {
-                    selectedProducts.add(product);
-                } else {
-                    selectedProducts.remove(product);
-                }
-                updateTotalPrice();
-            });
-
-            return convertView;
-        }
-
-        private void updateTotalPrice() {
-            totalPrice = 0.0;
-            for (Product product : selectedProducts) {
-                totalPrice += product.getPrice();
-            }
-            bottomCartTextView.setText("购物车：￥" + totalPrice);
-        }
-
-        class ViewHolder {
-            TextView productNameTextView;
-            CheckBox checkBox;
-        }
-    }
 
 }

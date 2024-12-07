@@ -1,5 +1,5 @@
 package com.wutongyu.mannyburger;
-
+//评论数据封装类
 public class Comment {
     private int CommentId;
     private String UserName;
