@@ -12,10 +12,10 @@ import java.util.List;
 
 public class ProductAdapter extends BaseAdapter {
 
-    private Context context;
-    private List<Product> productList;
-    private List<Product> selectedProducts;
-    private TextView bottomCartTextView;
+    private final Context context;
+    private final List<Product> productList;
+    private final List<Product> selectedProducts;
+    private final TextView bottomCartTextView;
     private double totalPrice;
 
     public ProductAdapter(Context context, List<Product> productList, List<Product> selectedProducts, TextView bottomCartTextView) {
@@ -24,7 +24,6 @@ public class ProductAdapter extends BaseAdapter {
         this.selectedProducts = selectedProducts;
         this.bottomCartTextView = bottomCartTextView;
     }
-
 
 
     @Override

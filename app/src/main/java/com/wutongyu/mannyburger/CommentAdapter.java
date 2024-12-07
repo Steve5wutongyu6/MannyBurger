@@ -11,15 +11,14 @@ import java.util.List;
 
 public class CommentAdapter extends ArrayAdapter<Comment> {
 
-    private Context context;
-    private List<Comment> commentList;
+    private final Context context;
+    private final List<Comment> commentList;
 
     public CommentAdapter(Context context, List<Comment> commentList) {
         super(context, 0, commentList);
         this.context = context;
         this.commentList = commentList;
     }
-
 
 
     @Override

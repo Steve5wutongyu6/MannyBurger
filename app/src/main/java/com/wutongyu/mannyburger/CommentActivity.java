@@ -17,6 +17,7 @@ public class CommentActivity extends AppCompatActivity {
     private CommentAdapter adapter;
     private List<Comment> commentList;
     private CommentDatabaseHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,11 +64,13 @@ public class CommentActivity extends AppCompatActivity {
             dbHelper.updateComment(comment);
         }
     }
+
     private void refreshListView() {
         List<Comment> comments = dbHelper.getAllComments();
         CommentAdapter adapter = new CommentAdapter(this, comments);
         listView.setAdapter(adapter);
     }
+
     private void loadCommentsFromDatabase(CommentDatabaseHelper dbHelper) {
         commentList.clear();
         commentList.addAll(dbHelper.getAllComments());

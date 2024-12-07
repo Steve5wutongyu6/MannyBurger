@@ -24,7 +24,7 @@ public class CommentDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_COMMENT_TIME = "comment_time";
     private static final String COLUMN_VIDEO = "video";
 
-    private Context context;
+    private final Context context;
     private List<Comment> commentList;
 
     public CommentDatabaseHelper(Context context) {
