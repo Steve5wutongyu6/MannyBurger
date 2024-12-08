@@ -17,6 +17,7 @@ public class ProductAdapter extends BaseAdapter {
     private final List<Product> selectedProducts;
     private final TextView bottomCartTextView;
     private double totalPrice;
+    private OnTotalPriceChangedListener totalPriceChangedListener;
 
     public ProductAdapter(Context context, List<Product> productList, List<Product> selectedProducts, TextView bottomCartTextView) {
         this.context = context;
@@ -72,12 +73,23 @@ public class ProductAdapter extends BaseAdapter {
         return convertView;
     }
 
+    public void setOnTotalPriceChangedListener(OnTotalPriceChangedListener listener) {
+        this.totalPriceChangedListener = listener;
+    }
+
     private void updateTotalPrice() {
         totalPrice = 0.0;
         for (Product product : selectedProducts) {
             totalPrice += product.getPrice();
         }
         bottomCartTextView.setText("购物车：￥" + totalPrice);
+        if (totalPriceChangedListener != null) {
+            totalPriceChangedListener.onTotalPriceChanged(totalPrice);
+        }
+    }
+
+    public interface OnTotalPriceChangedListener {
+        void onTotalPriceChanged(double totalPrice);
     }
 
     static class ViewHolder {

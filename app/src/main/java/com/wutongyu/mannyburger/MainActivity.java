@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -16,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ProductAdapter.OnTotalPriceChangedListener {
 
     private ListView menuItemsListView;
     private RadioGroup categoriesRadioGroup;
@@ -51,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
         // 绑定适配器productAdapter
         productAdapter = new ProductAdapter(this, productList, selectedProducts, bottomCartTextView);
+        productAdapter.setOnTotalPriceChangedListener(this);
         menuItemsListView.setAdapter(productAdapter);
-
 
         // 监听单选按钮
         categoriesRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
@@ -92,10 +93,17 @@ public class MainActivity extends AppCompatActivity {
             }
             String orderDetails = orderDetailsBuilder.toString().trim();
 
+
+            Log.d("MainActivity", "Total Price: " + totalPrice);
             Intent intent = new Intent(MainActivity.this, OrderActivity.class);
             intent.putExtra("order_details", orderDetails);
             intent.putExtra("total_price", totalPrice);
             startActivity(intent);
+
+/*            Intent intent = new Intent(MainActivity.this, OrderActivity.class);
+            intent.putExtra("order_details", orderDetails);
+            intent.putExtra("total_price", totalPrice);
+            startActivity(intent);*/
         });
     }
 
@@ -116,5 +124,10 @@ public class MainActivity extends AppCompatActivity {
         return products;
     }
 
+    @Override
+    public void onTotalPriceChanged(double totalPrice) {
+        this.totalPrice = totalPrice;
+        Log.d("MainActivity", "Updated Total Price: " + totalPrice);
+    }
 
 }

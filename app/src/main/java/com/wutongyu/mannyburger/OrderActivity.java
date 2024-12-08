@@ -2,6 +2,7 @@ package com.wutongyu.mannyburger;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,10 +40,12 @@ public class OrderActivity extends AppCompatActivity {
         totalPriceTextView = findViewById(R.id.totalPrice);
         submitOrderButton = findViewById(R.id.submitOrder);
 
-        // 从MainActivity获取订单详情和总价
         Intent intent = getIntent();
         String orderDetails = intent.getStringExtra("order_details");
         totalPrice = intent.getDoubleExtra("total_price", 0.0);
+        Log.d("OrderActivity", "Received Total Price: " + totalPrice);
+        totalPriceTextView.setText("合计 ￥" + totalPrice);
+
 
         // 订单总价格
         totalPriceTextView.setText("合计 ￥" + totalPrice);
