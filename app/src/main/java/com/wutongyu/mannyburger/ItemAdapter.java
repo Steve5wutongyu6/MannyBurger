@@ -28,6 +28,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         return new ItemViewHolder(view);
     }
 
+    // 获取商品名称和价格数据
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         Item item = itemList.get(position);
@@ -36,6 +37,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.itemView.setOnClickListener(v -> toggleSelection(item));
     }
 
+    // 用户选定商品时事件，将商品添加到或从列表中删除
     private void toggleSelection(Item item) {
         if (selectedItems.contains(item)) {
             selectedItems.remove(item);
@@ -44,11 +46,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         }
     }
 
+    // 商品数量计数器
     @Override
     public int getItemCount() {
         return itemList.size();
     }
 
+    // 将选定商品存入列表后返回
     public List<Item> getSelectedItems() {
         return selectedItems;
     }
@@ -56,7 +60,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     static class ItemViewHolder extends RecyclerView.ViewHolder {
         TextView productNameTextView;
         CheckBox checkBox;
-
+        // 绑定控件
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             productNameTextView = itemView.findViewById(android.R.id.text1);

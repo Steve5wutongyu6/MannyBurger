@@ -13,6 +13,7 @@ public class VideoPlayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_play);
 
+        // 绑定控件
         VideoView videoView = findViewById(R.id.videoView);
         String videoPath = getIntent().getStringExtra("videoPath");
 
@@ -22,6 +23,7 @@ public class VideoPlayActivity extends AppCompatActivity {
         } else {
             videoView.setVideoURI(Uri.parse("file://" + videoPath));
         }
+        // 调用视频播放方法
         videoView.start();
     }
 }

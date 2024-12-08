@@ -23,12 +23,14 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        // 如果 convertView 为空，则创建一个新视图
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_2, parent, false);
         }
-
+        // 获取当前评论
         Comment comment = commentList.get(position);
 
+        // 绑定控件
         TextView text1 = convertView.findViewById(android.R.id.text1);
         TextView text2 = convertView.findViewById(android.R.id.text2);
 

@@ -19,6 +19,7 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
         return TABLE_PRODUCTS;
     }
 
+    // 表结构
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE = "CREATE TABLE " + TABLE_PRODUCTS + "(" +
@@ -31,6 +32,7 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
         insertInitialData(db);
     }
 
+    // 样例数据，在进入应用时插入数据库中
     private void insertInitialData(SQLiteDatabase db) {
         ContentValues values = new ContentValues();
 

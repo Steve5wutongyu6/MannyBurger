@@ -52,6 +52,7 @@ public class CommentDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    // 添加评论
     public void addComment(Comment comment) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -63,13 +64,14 @@ public class CommentDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    // 获取评论列表
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_2, parent, false);
         }
 
         Comment comment = commentList.get(position);
-
+        // 绑定控件
         TextView text1 = convertView.findViewById(android.R.id.text1);
         TextView text2 = convertView.findViewById(android.R.id.text2);
 
@@ -81,26 +83,32 @@ public class CommentDatabaseHelper extends SQLiteOpenHelper {
 
 
     public List<Comment> getAllComments() {
-        List<Comment> commentList = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE_COMMENTS;
+        List<Comment> commentList = new ArrayList<>(); // 初始化评论列表
+        SQLiteDatabase db = this.getReadableDatabase(); // 获取评论数据库
+        String query = "SELECT * FROM " + TABLE_COMMENTS; // 查询
         Cursor cursor = db.rawQuery(query, null);
 
+        // 检查游标是否成功移动到第一条记录
         if (cursor.moveToFirst()) {
+            // 获取各列的索引
             int idIndex = cursor.getColumnIndex(COLUMN_COMMENT_ID);
             int userNameIndex = cursor.getColumnIndex(COLUMN_USER_NAME);
             int commentContentIndex = cursor.getColumnIndex(COLUMN_COMMENT_CONTENT);
             int commentTimeIndex = cursor.getColumnIndex(COLUMN_COMMENT_TIME);
             int videoIndex = cursor.getColumnIndex(COLUMN_VIDEO);
 
+            // 确保所有需要的列都存在
             if (idIndex != -1 && userNameIndex != -1 && commentContentIndex != -1 && commentTimeIndex != -1 && videoIndex != -1) {
+                // 遍历游标中的每一项记录
                 do {
+                    // 根据列索引获取数据
                     int id = cursor.getInt(idIndex);
                     String userName = cursor.getString(userNameIndex);
                     String commentContent = cursor.getString(commentContentIndex);
                     String commentTime = cursor.getString(commentTimeIndex);
                     String video = cursor.getString(videoIndex);
 
+                    // 创建Comment对象并添加到评论列表中
                     Comment comment = new Comment(id, userName, commentContent, commentTime, video);
                     commentList.add(comment);
                 } while (cursor.moveToNext());

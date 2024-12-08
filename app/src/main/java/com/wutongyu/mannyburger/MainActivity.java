@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -94,16 +94,12 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
             String orderDetails = orderDetailsBuilder.toString().trim();
 
 
-            Log.d("MainActivity", "Total Price: " + totalPrice);
+            //Log.d("MainActivity", "Total Price: " + totalPrice);
             Intent intent = new Intent(MainActivity.this, OrderActivity.class);
             intent.putExtra("order_details", orderDetails);
             intent.putExtra("total_price", totalPrice);
             startActivity(intent);
 
-/*            Intent intent = new Intent(MainActivity.this, OrderActivity.class);
-            intent.putExtra("order_details", orderDetails);
-            intent.putExtra("total_price", totalPrice);
-            startActivity(intent);*/
         });
     }
 
@@ -114,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
 
         // 查询数据库中的所有商品数据
         Cursor cursor = db.query(table, new String[]{"pid", "pname", "shop_price"}, null, null, null, null, null);
+        // 遍历商品数据，并添加到商品列表
         while (cursor.moveToNext()) {
             int pid = cursor.getInt(cursor.getColumnIndexOrThrow("pid"));
             String pname = cursor.getString(cursor.getColumnIndexOrThrow("pname"));
@@ -124,10 +121,12 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
         return products;
     }
 
+
+    // onTotalPriceChanged接口，用于更新OrderActivity总价
     @Override
     public void onTotalPriceChanged(double totalPrice) {
         this.totalPrice = totalPrice;
-        Log.d("MainActivity", "Updated Total Price: " + totalPrice);
+        //Log.d("MainActivity", "Updated Total Price: " + totalPrice);
     }
 
 }

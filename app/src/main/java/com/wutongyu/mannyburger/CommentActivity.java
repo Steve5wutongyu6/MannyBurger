@@ -33,8 +33,7 @@ public class CommentActivity extends AppCompatActivity {
         CommentDatabaseHelper dbHelper = new CommentDatabaseHelper(this);
 
         // 无论是否存在数据，先清空评论数据，可以调用emptyComment方法
-        emptyAllComments();
-
+        //emptyAllComments();// 这个方法有问题，不生效
         // 刷新列表视图
         refreshListView();
 
@@ -57,20 +56,23 @@ public class CommentActivity extends AppCompatActivity {
         loadCommentsFromDatabase(dbHelper);
     }
 
+/*    // 清空所有评论,此方法不生效，已废弃
     private void emptyAllComments() {
         List<Comment> comments = dbHelper.getAllComments();
         for (Comment comment : comments) {
             dbHelper.emptyComment(comment);
             dbHelper.updateComment(comment);
         }
-    }
+    }*/
 
+    //刷新评论列表
     private void refreshListView() {
         List<Comment> comments = dbHelper.getAllComments();
         CommentAdapter adapter = new CommentAdapter(this, comments);
         listView.setAdapter(adapter);
     }
 
+    // 加载评论数据库
     private void loadCommentsFromDatabase(CommentDatabaseHelper dbHelper) {
         commentList.clear();
         commentList.addAll(dbHelper.getAllComments());

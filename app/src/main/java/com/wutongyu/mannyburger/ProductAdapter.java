@@ -73,10 +73,12 @@ public class ProductAdapter extends BaseAdapter {
         return convertView;
     }
 
+    // 设置监听器setOnTotalPriceChangedListener，用于更新MainActivity购物车总金额
     public void setOnTotalPriceChangedListener(OnTotalPriceChangedListener listener) {
         this.totalPriceChangedListener = listener;
     }
 
+    // 用于更新MainActivity购物车总金额
     private void updateTotalPrice() {
         totalPrice = 0.0;
         for (Product product : selectedProducts) {
@@ -88,6 +90,7 @@ public class ProductAdapter extends BaseAdapter {
         }
     }
 
+    // 回调接口，用于更新OrderActivity用户订单总金额（这是个补丁，改ProductAdapter出问题了导致用户订单总金额获取不到数据）
     public interface OnTotalPriceChangedListener {
         void onTotalPriceChanged(double totalPrice);
     }
