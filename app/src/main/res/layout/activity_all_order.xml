@@ -10,8 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp"
-        >
+        android:padding="8dp">
 
         <ImageView
             android:layout_width="24dp"
@@ -23,8 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="所有订单"
-            android:textSize="18sp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -36,68 +35,68 @@
         android:layout_marginTop="16dp"
         android:background="@color/black" />
     <!-- Order Item -->
-   <!-- <LinearLayout
-        android:id="@+id/OrderItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp">
+    <!-- <LinearLayout
+         android:id="@+id/OrderItem"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+         android:layout_marginTop="16dp">
 
-        <ImageView
-            android:id="@+id/dishImageView"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/ham" />
+         <ImageView
+             android:id="@+id/dishImageView"
+             android:layout_width="80dp"
+             android:layout_height="80dp"
+             android:src="@drawable/ham" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_marginLeft="16dp">
+         <LinearLayout
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:orientation="vertical"
+             android:layout_weight="1"
+             android:layout_marginLeft="16dp">
 
-            <TextView
-                android:id="@+id/dishNameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="菜品名称"
-                android:textSize="18sp"
-                android:textColor="@color/black" />
+             <TextView
+                 android:id="@+id/dishNameTextView"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="菜品名称"
+                 android:textSize="18sp"
+                 android:textColor="@color/black" />
 
-            <TextView
-                android:id="@+id/orderIdTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2100002532569694"
-                android:textSize="16sp"
-                android:textColor="@color/black" />
+             <TextView
+                 android:id="@+id/orderIdTextView"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="2100002532569694"
+                 android:textSize="16sp"
+                 android:textColor="@color/black" />
 
-            <TextView
-                android:id="@+id/orderDateTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2024-12-05 10:54:40"
-                android:textSize="16sp"
-                android:textColor="@color/black" />
+             <TextView
+                 android:id="@+id/orderDateTextView"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="2024-12-05 10:54:40"
+                 android:textSize="16sp"
+                 android:textColor="@color/black" />
 
-            <TextView
-                android:id="@+id/priceTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="15元"
-                android:textSize="16sp"
-                android:textColor="@color/black" />
-        </LinearLayout>
+             <TextView
+                 android:id="@+id/priceTextView"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="15元"
+                 android:textSize="16sp"
+                 android:textColor="@color/black" />
+         </LinearLayout>
 
-        <Button
-            android:id="@+id/copyButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="再来一单"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="16dp"
-            android:background="@color/black" />
-    </LinearLayout>-->
+         <Button
+             android:id="@+id/copyButton"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="再来一单"
+             android:layout_gravity="center_vertical"
+             android:layout_marginLeft="16dp"
+             android:background="@color/black" />
+     </LinearLayout>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/orderRecyclerView"
@@ -105,17 +104,17 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:divider="@null"
-        android:dividerHeight="0dp"/>
+        android:dividerHeight="0dp" />
 
     <Button
         android:id="@+id/copyButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="再来一单"
-        android:textSize="16sp"
-        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
         android:background="@color/black"
-        android:layout_marginTop="16dp"/>
+        android:text="再来一单"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
     <!-- Divider -->
     <View
@@ -131,10 +130,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:gravity="center_horizontal"
         android:text="我是有底线的"
-        android:textSize="16sp"
         android:textColor="@color/black"
-        android:gravity="center_horizontal" />
+        android:textSize="16sp" />
 
 </LinearLayout>
 

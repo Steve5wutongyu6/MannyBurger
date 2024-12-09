@@ -2,17 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@drawable/bg">
+    android:background="@drawable/bg"
+    android:padding="16dp">
 
     <!-- Search and options -->
     <LinearLayout
         android:id="@+id/searchOptions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingTop="16dp"
-        android:gravity="center_vertical">
+        android:paddingTop="16dp">
 
         <TextView
             android:layout_width="250dp"
@@ -34,75 +34,75 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/searchOptions"
-        android:layout_marginTop ="16dp"
+        android:layout_marginTop="16dp"
         android:background="@color/black" />
 
     <!-- Categories -->
     <RadioGroup
         android:id="@+id/categories"
-        android:layout_below="@id/divider1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/divider1"
+        android:gravity="center_horizontal"
         android:orientation="horizontal"
-        android:paddingTop="16dp"
-        android:gravity="center_horizontal">
+        android:paddingTop="16dp">
 
         <RadioButton
             android:id="@+id/ordering"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:checked="true"
-            android:text="点单"
-            android:layout_marginEnd="16dp"/>
+            android:text="点单" />
 
         <RadioButton
             android:id="@+id/shop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="评论"/>
+            android:text="评论" />
     </RadioGroup>
 
     <!-- Menu items -->
     <ListView
         android:id="@+id/menuItems"
-        android:layout_below="@id/categories"
-        android:layout_above="@id/bottomCart"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_above="@id/bottomCart"
+        android:layout_below="@id/categories"
         android:layout_weight="1"
         android:choiceMode="multipleChoice"
-        android:listSelector="@android:color/transparent"
         android:divider="@null"
-        android:dividerHeight="0dp"/>
+        android:dividerHeight="0dp"
+        android:listSelector="@android:color/transparent" />
 
     <!-- Bottom cart -->
     <LinearLayout
         android:id="@+id/bottomCart"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:padding="16dp">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/cart"
-            android:contentDescription="Shopping Cart"/>
+            android:contentDescription="Shopping Cart"
+            android:src="@drawable/cart" />
 
         <TextView
             android:id="@+id/bottomCartTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="购物车：0元"
-            android:paddingStart="16dp"/>
+            android:paddingStart="16dp"
+            android:text="购物车：0元" />
 
         <Button
             android:id="@+id/SubmitOrderButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="去结算"/>
+            android:text="去结算" />
     </LinearLayout>
 </RelativeLayout>
