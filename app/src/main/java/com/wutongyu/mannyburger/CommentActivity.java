@@ -37,6 +37,8 @@ public class CommentActivity extends AppCompatActivity {
         // 刷新列表视图
         refreshListView();
 
+        // 删除评论
+        dbHelper.deleteAllComments();
 
         // 添加好评
         dbHelper.addComment(new Comment(0, "Alice", "The burger was amazing! Highly recommend.", new Date().toString(), null));

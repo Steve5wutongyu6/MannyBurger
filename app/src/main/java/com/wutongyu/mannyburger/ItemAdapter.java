@@ -60,6 +60,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     static class ItemViewHolder extends RecyclerView.ViewHolder {
         TextView productNameTextView;
         CheckBox checkBox;
+
         // 绑定控件
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
