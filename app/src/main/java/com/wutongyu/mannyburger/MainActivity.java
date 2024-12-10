@@ -1,9 +1,13 @@
 package com.wutongyu.mannyburger;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -24,11 +28,28 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
     private RadioButton shopRadioButton;
     private Button allOrderButton;
     private Button submitOrderButton;
+    private Button toggleMusicButton;
     private TextView bottomCartTextView;
     private ProductAdapter productAdapter;
     private List<Product> productList;
     private List<Product> selectedProducts;
     private double totalPrice;
+    private BGMService bgmService;
+    private boolean isBound = false;
+
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            BGMService.LocalBinder binder = (BGMService.LocalBinder) service;
+            bgmService = binder.getService();
+            isBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            isBound = false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
         allOrderButton = findViewById(R.id.AllOrderButton);
         submitOrderButton = findViewById(R.id.SubmitOrderButton);
         bottomCartTextView = findViewById(R.id.bottomCartTextView);
+        toggleMusicButton = findViewById(R.id.toggleMusicButton);
 
         // 初始化数据
         ProductDatabaseHelper dbHelper = new ProductDatabaseHelper(this);
@@ -83,7 +105,6 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
             }
         });
 
-
         // 提交按钮相关
         submitOrderButton.setOnClickListener(v -> {
             StringBuilder orderDetailsBuilder = new StringBuilder();
@@ -92,24 +113,48 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
             }
             String orderDetails = orderDetailsBuilder.toString().trim();
 
-
-            //Log.d("MainActivity", "Total Price: " + totalPrice);
             Intent intent = new Intent(MainActivity.this, OrderActivity.class);
             intent.putExtra("order_details", orderDetails);
             intent.putExtra("total_price", totalPrice);
             startActivity(intent);
-
         });
+
+        // 控制音乐播放/暂停
+        toggleMusicButton.setOnClickListener(v -> {
+            if (isBound) {
+                if (bgmService.isPlaying()) {
+                    bgmService.pauseMusic();
+                    toggleMusicButton.setText("播放音乐");
+                } else {
+                    bgmService.playMusic();
+                    toggleMusicButton.setText("暂停音乐");
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = new Intent(this, BGMService.class);
+        bindService(intent, connection, Context.BIND_AUTO_CREATE);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (isBound) {
+            unbindService(connection);
+            isBound = false;
+        }
     }
 
     // 从数据库加载商品数据
     private List<Product> loadProductsFromDatabase(SQLiteDatabase db) {
-        List<Product> products = new ArrayList<>();// 创建一个空列表
-        String table = ProductDatabaseHelper.getTableProducts(); // 使用公共方法获取表名
+        List<Product> products = new ArrayList<>();
+        String table = ProductDatabaseHelper.getTableProducts();
 
-        // 查询数据库中的所有商品数据
         Cursor cursor = db.query(table, new String[]{"pid", "pname", "shop_price"}, null, null, null, null, null);
-        // 遍历商品数据，并添加到商品列表
         while (cursor.moveToNext()) {
             int pid = cursor.getInt(cursor.getColumnIndexOrThrow("pid"));
             String pname = cursor.getString(cursor.getColumnIndexOrThrow("pname"));
@@ -120,12 +165,9 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
         return products;
     }
 
-
     // onTotalPriceChanged接口，用于更新OrderActivity总价
     @Override
     public void onTotalPriceChanged(double totalPrice) {
         this.totalPrice = totalPrice;
-        //Log.d("MainActivity", "Updated Total Price: " + totalPrice);
     }
-
 }

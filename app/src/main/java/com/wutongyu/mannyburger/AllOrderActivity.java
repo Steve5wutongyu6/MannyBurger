@@ -49,7 +49,7 @@ public class AllOrderActivity extends AppCompatActivity {
                 Order lastOrder = orderList.get(orderList.size() - 1);
                 dbHelper.insertOrder(lastOrder.getItems(), lastOrder.getNote(), lastOrder.getTotalPrice());
                 Toast.makeText(AllOrderActivity.this, "订单创建成功", Toast.LENGTH_SHORT).show();
-                loadOrders(); // Refresh the list
+                loadOrders(); // 刷新列表
             } else {
                 Toast.makeText(AllOrderActivity.this, "没有可复制的订单", Toast.LENGTH_SHORT).show();
             }

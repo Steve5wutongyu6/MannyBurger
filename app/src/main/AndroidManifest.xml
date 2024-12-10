@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MannyBurger"
         tools:targetApi="31">
+        <service
+            android:name=".BGMService"
+            android:enabled="true"
+            android:exported="true"></service>
+
         <activity
             android:name=".VideoPlayActivity"
             android:exported="false" />
