@@ -18,31 +18,31 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center_horizontal"
             android:text="老北京炸酱面"
             android:textSize="19dp"
-            android:textStyle="bold"
-            android:gravity="center_horizontal"/>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/AllOrderButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="4dp"
-            android:text="所有订单"
+            android:layout_weight="1"
             android:padding="10dp"
+            android:text="所有订单"
             android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/toggleMusicButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="8dp"
-            android:text="播放音乐"
+            android:layout_weight="1"
             android:padding="10dp"
+            android:text="播放音乐"
             android:textColor="@android:color/white" />
     </LinearLayout>
 

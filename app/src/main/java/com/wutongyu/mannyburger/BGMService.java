@@ -15,12 +15,6 @@ public class BGMService extends Service {
         return isPlaying;
     }
 
-    public class LocalBinder extends Binder {
-        public BGMService getService() {
-            return BGMService.this;
-        }
-    }
-
     @Override
     public IBinder onBind(Intent intent) {
         return binder;
@@ -53,6 +47,12 @@ public class BGMService extends Service {
         if (isPlaying) {
             mediaPlayer.pause();
             isPlaying = false;
+        }
+    }
+
+    public class LocalBinder extends Binder {
+        public BGMService getService() {
+            return BGMService.this;
         }
     }
 }
