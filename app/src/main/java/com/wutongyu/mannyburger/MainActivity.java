@@ -3,9 +3,11 @@ package com.wutongyu.mannyburger;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.View;
@@ -50,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
             isBound = false;
         }
     };
+
+    private WifiStateReceiver wifiStateReceiver = new WifiStateReceiver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +135,11 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
                 }
             }
         });
+
+        // 广播接收器
+
+        IntentFilter filter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        registerReceiver(new WifiStateReceiver(), filter);
     }
 
     @Override
@@ -148,6 +157,13 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
             isBound = false;
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(wifiStateReceiver);
+    }
+
 
     // 从数据库加载商品数据
     private List<Product> loadProductsFromDatabase(SQLiteDatabase db) {
