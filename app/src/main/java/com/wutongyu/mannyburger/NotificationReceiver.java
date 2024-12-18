@@ -10,11 +10,7 @@ public class NotificationReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if ("com.wutongyu.mannyburger.PLAY_PAUSE".equals(intent.getAction())) {
             Intent serviceIntent = new Intent(context, BGMService.class);
-            if (BGMService.isMediaPlayerPlaying()) {
-                serviceIntent.putExtra("action", "pause");
-            } else {
-                serviceIntent.putExtra("action", "play");
-            }
+            serviceIntent.setAction("com.wutongyu.mannyburger.PLAY_PAUSE");
             context.startService(serviceIntent);
         }
     }
