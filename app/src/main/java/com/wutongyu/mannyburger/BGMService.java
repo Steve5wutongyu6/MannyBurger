@@ -98,7 +98,9 @@ public class BGMService extends Service {
                 AudioManager.STREAM_MUSIC,
                 AudioManager.AUDIOFOCUS_GAIN) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
             startForeground(NOTIFICATION_ID, createNotification());
-            if (!isPlaying) {
+            if (intent != null && "com.wutongyu.mannyburger.PLAY_PAUSE".equals(intent.getAction())) {
+                handlePlayPauseAction();
+            } else if (!isPlaying) {
                 playMusic();
             }
         }
@@ -132,6 +134,14 @@ public class BGMService extends Service {
             mediaPlayer.pause();
             isPlaying = false;
             updateNotification(false);
+        }
+    }
+
+    private void handlePlayPauseAction() {
+        if (isPlaying) {
+            pauseMusic();
+        } else {
+            playMusic();
         }
     }
 
